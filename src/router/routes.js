@@ -10,11 +10,27 @@ const routes = [
       },
       {
         path: 'wenda/',
+        redirect: '/wenda/home',
         component: () => import('pages/Blank.vue'),
         children: [
           {
             path: 'home',
             name: '问答 数+控制台',
+            component: () => import('pages/wenda/Home.vue')
+          },
+          {
+            path: 'list',
+            name: '问答列表',
+            component: () => import('pages/wenda/List.vue')
+          },
+          {
+            path: 'new',
+            name: '新建问答',
+            component: () => import('pages/wenda/Home.vue')
+          },
+          {
+            path: 'markets',
+            name: '问题市场',
             component: () => import('pages/wenda/Home.vue')
           }
         ]
