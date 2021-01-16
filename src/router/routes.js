@@ -24,6 +24,11 @@ const routes = [
             component: () => import('pages/wenda/List.vue')
           },
           {
+            path: 'questions/:id',
+            name: '问答详情',
+            component: () => import('pages/wenda/Details.vue')
+          },
+          {
             path: 'new',
             name: '新建问答',
             component: () => import('pages/wenda/Home.vue')
