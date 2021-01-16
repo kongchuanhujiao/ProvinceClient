@@ -23,7 +23,7 @@
           class="q-ma-xs q-mr-md"
           style="height: 24px"
           outline
-          color="teal"
+          color="grey-14"
           :label="badgeClass(q.target)"
         />
 
@@ -40,7 +40,6 @@ export default {
   name: 'WendaList',
   data () {
     return {
-      // TODO 从服务器获取数据
       data: {
         questions: [],
         groups: []
@@ -58,8 +57,7 @@ export default {
       })
     },
 
-    questionToString (str) {
-      const q = JSON.parse(str)
+    questionToString (q) {
       let text = ''
 
       for (let i = 0; i < q.length; i++) {
@@ -75,11 +73,11 @@ export default {
     badgeColor (status) {
       switch (status) {
         case 0:
-          return 'positive'
+          return 'green-13'
         case 1:
-          return 'primary'
+          return 'light-blue-12'
         case 2:
-          return 'negative'
+          return 'red-12'
       }
     },
     badgeText (status) {
