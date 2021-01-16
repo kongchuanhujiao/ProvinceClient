@@ -1,14 +1,24 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header class="bg-white">
-      <q-toolbar class="text-primary">
+  <q-layout
+    view="lHh Lpr lFf"
+    class="flex"
+    style="flex-flow: column; align-items: center"
+  >
+    <q-header
+      class="flex bg-white"
+      style="flex-flow: column; align-items: center"
+    >
+      <q-toolbar
+        class="text-primary"
+        style="max-width: 1333px"
+      >
         <q-btn
           flat dense round
           icon="menu"
           aria-label="菜单"
         >
           <q-menu>
-            <q-list style="min-width: 160px">
+            <q-list style="width: 150px">
 
               <q-item
                 clickable exact
@@ -17,7 +27,12 @@
                 :to="i.to"
               >
                 <q-item-section avatar>
-                  <q-avatar :icon="i.icon" text-color="white" size="md" :color="i.bg"/>
+                  <q-avatar
+                    :icon="i.icon"
+                    size="md"
+                    :color="i.bg"
+                    text-color="white"
+                  />
                 </q-item-section>
                 <q-item-section>{{ i.name }}</q-item-section>
               </q-item>
@@ -26,11 +41,15 @@
           </q-menu>
         </q-btn>
 
-        <q-toolbar-title class="text-center text-black">{{ title }}</q-toolbar-title>
+        <q-toolbar-title
+          class="text-center text-black text-weight-bold"
+        >
+          {{ title }}
+        </q-toolbar-title>
       </q-toolbar>
     </q-header>
 
-    <q-page-container>
+    <q-page-container style="max-width: 1333px;width: 100%;">
       <router-view/>
     </q-page-container>
   </q-layout>
