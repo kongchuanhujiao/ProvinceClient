@@ -1,13 +1,13 @@
 <template>
-  <q-page class="flex flex-center"
-          style="background: url('https://v.campus.qq.com/static/cloudCourse/pc-bg.png') center center / cover no-repeat">
-    <div class="text-h1 text-weight-bolder text-white" style="position: absolute;left: 8%;">欢迎登录</div>
+  <q-page
+    class="flex flex-center"
+    style="background: url('https://s3.ax1x.com/2021/01/19/sRSg7n.png') left center / 50% no-repeat"
+  >
     <q-form
       class="q-pa-lg q-gutter-md text-center bg-white shadow-1"
       style="position: absolute;right: 8%;max-width: 380px;width: 100%;border-radius: 16px"
       @submit="login"
     >
-
       <q-input
         outlined clearable autofocus
         label="用户名"
@@ -45,7 +45,7 @@
         class="q-px-xl"
         color="primary"
         label="登录"
-      ></q-btn>
+      />
     </q-form>
 
   </q-page>
@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  name: 'PageIndex',
+  name: 'Index',
   data () {
     return {
       account: '',
@@ -98,6 +98,8 @@ export default {
           message: '登录成功，正在为您跳转...',
           position: 'top-right'
         })
+
+        // TODO 去主页
       })
     }
   }
