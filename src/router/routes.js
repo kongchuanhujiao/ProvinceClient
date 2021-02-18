@@ -11,7 +11,7 @@ const routes = [
       {
         path: 'wenda/',
         redirect: '/wenda/home',
-        component: () => import('pages/Blank.vue'),
+        component: () => import('src/EntryPoint.vue'),
         children: [
           {
             path: 'home',
