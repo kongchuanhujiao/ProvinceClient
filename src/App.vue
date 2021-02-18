@@ -20,6 +20,7 @@
     </q-header>
 
     <q-page-container class="limited bg-white">
+      <q-ajax-bar color="positive"/>
       <router-view @name="name"/>
     </q-page-container>
   </q-layout>
@@ -62,6 +63,7 @@ export default {
   methods: {
     name (n) {
       this.title = n
+      document.title = n + ' - 空中与传统互动教学AI'
     }
   }
 }
