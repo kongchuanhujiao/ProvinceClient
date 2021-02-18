@@ -1,39 +1,35 @@
 <template>
-  <q-list>
-    <router-link
-      style="text-decoration: none"
+  <q-page>
+    <q-list>
+      <router-link class="block link" v-for="q in data.questions" :key="q.id" :to="'/wenda/questions/'+q.id">
+        <q-item clickable class="text-justify">
+          <q-badge class="badge q-ma-xs" :color="badgeColor(q.status)" :label="badgeText(q.status)"/>
 
-      v-for="q in data.questions"
-      :key="q.id"
+          <q-badge outline class="badge q-ma-xs q-mr-sm" color="grey-13" :label="badgeClass(q.target)"/>
 
-      :to="'/wenda/questions/'+q.id"
-    >
-      <q-item
-        clickable
-        class="q-ma-sm text-justify text-grey-9 text-weight-bold"
-      >
-        <q-badge
-          class="q-ma-xs"
-          style="height: 24px"
-          :color="badgeColor(q.status)"
-          :label="badgeText(q.status)"
-        />
+          <q-item-section class="text-weight-regular text-grey-9">{{ questionToString(q.question) }}</q-item-section>
+        </q-item>
+      </router-link>
+    </q-list>
 
-        <q-badge
-          class="q-ma-xs q-mr-md"
-          style="height: 24px"
-          outline
-          color="grey-14"
-          :label="badgeClass(q.target)"
-        />
-
-        <q-item-section>
-          {{ questionToString(q.question) }}
-        </q-item-section>
-      </q-item>
-    </router-link>
-  </q-list>
+    <q-btn round color="primary" icon="add" class="fixed-bottom-right new" size="lg"></q-btn>
+  </q-page>
 </template>
+
+<style scoped>
+.link {
+  text-decoration: none;
+}
+
+.new {
+  bottom: 24px;
+  right: 24px;
+}
+
+.badge {
+  height: 24px;
+}
+</style>
 
 <script>
 export default {
@@ -103,7 +99,3 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-
-</style>
