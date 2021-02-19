@@ -23,6 +23,12 @@
       <q-ajax-bar color="positive"/>
       <router-view @name="name"/>
     </q-page-container>
+
+    <q-footer class="q-px-sm">
+      © 2020-present
+      <a class="text-white" href="//github.com/kongchuanhujiao"> kongchuanhujiao</a>.
+      AGPL-3.0
+    </q-footer>
   </q-layout>
 </template>
 
