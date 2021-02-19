@@ -1,8 +1,9 @@
 <template>
   <q-layout id="q-app" view="hHh lpr fff" class="layout flex bg-grey-2">
     <q-header class="layout flex bg-white">
-      <q-toolbar class="limited">
-        <q-btn flat round class="text-grey-14" icon="menu" aria-label="菜单">
+      <q-toolbar class="limited text-grey-14">
+        <q-btn flat round icon="keyboard_backspace" aria-label="返回" @click="$router.back()"/>
+        <q-btn flat round icon="menu" aria-label="菜单">
           <q-menu>
             <q-list>
               <q-item clickable exact v-for="i in menu" :key="i.name" :to="i.to">
@@ -14,7 +15,6 @@
             </q-list>
           </q-menu>
         </q-btn>
-
         <q-toolbar-title class="text-black text-weight-bold">{{ title }}</q-toolbar-title>
       </q-toolbar>
     </q-header>
