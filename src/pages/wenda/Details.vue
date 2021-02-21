@@ -11,7 +11,8 @@
         问题：
         <span v-for="( item, i ) in data.questions[0].question" :key="i">
               <span v-if="item.type === 'text'">{{ item.data }}</span>
-              <img v-else :src="'/assets/pictures/questions/' + item.data" class="question-img" alt="问题图片">
+              <img v-else class="question-img" alt="问题图片"
+                   :src="'/assets/pictures/questions/'+$q.cookies.get('account') + item.data">
         </span>
       </div>
       <div class="q-my-xs">
