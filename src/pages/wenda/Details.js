@@ -54,20 +54,16 @@ export default {
         this.data = res.data.data
         this.status = res.data.data.questions[0].status
 
-        this.histogram(
-          0,
-          'data-right',
-          [{
-            type: '正确人数 ' + this.data.calculations.right.length,
-            value: this.data.calculations.right.length
-          }])
-        this.histogram(
-          1,
-          'data-wrong',
-          [{
-            type: '错误人数 ' + (this.data.calculations.count - this.data.calculations.right.length),
-            value: this.data.calculations.count - this.data.calculations.right.length
-          }])
+        this.switchWebsocket()
+
+        this.histogram(0, 'data-right', [{
+          type: '正确人数 ' + this.data.calculations.right.length,
+          value: this.data.calculations.right.length
+        }])
+        this.histogram(1, 'data-wrong', [{
+          type: '错误人数 ' + (this.data.calculations.count - this.data.calculations.right.length),
+          value: this.data.calculations.count - this.data.calculations.right.length
+        }])
         this.histogram(2, 'data-pronewrong', this.wrongDigest())
         this.update()
       })
@@ -100,13 +96,10 @@ export default {
         message: '确实更改状态为“' + this.badgeLabel(this.status) + '"吗？',
         cancel: true
       }).onOk(() => {
-        this.$axios.put(
-          '/apis/wenda/questions/status',
-          {
-            id: Number(this.$route.params.id),
-            status: this.status
-          }
-        ).then(res => {
+        this.$axios.put('/apis/wenda/questions/status', {
+          id: Number(this.$route.params.id),
+          status: this.status
+        }).then(res => {
           if (res.data.status !== 0) {
             this.status = this.data.questions[0].status
             this.$q.notify({
@@ -116,6 +109,7 @@ export default {
             return
           }
           this.data.questions[0].status = this.status
+          this.switchWebsocket()
           this.$q.notify({
             message: '成功更改状态：' + this.badgeLabel(this.status),
             position: 'top-right'
@@ -131,7 +125,7 @@ export default {
           try {
             this.websocket.close()
             clearInterval(this.close)
-          } catch {
+          } catch (e) {
           }
           break
         case 1:
@@ -213,7 +207,6 @@ export default {
     },
 
     update () {
-      this.switchWebsocket()
       this.proneWrong = this.wrongDigest()[0].type
 
       this.updateHistogram(0, [{
