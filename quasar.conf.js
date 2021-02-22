@@ -138,6 +138,11 @@ module.exports = function (/* ctx */) {
             src: 'icons/favicon-128x128.png',
             sizes: '128x128',
             type: 'image/png'
+          },
+          {
+            src: 'icons/icon-192x192.png',
+            sizes: '192x192',
+            type: 'image/png'
           }
         ]
       }
