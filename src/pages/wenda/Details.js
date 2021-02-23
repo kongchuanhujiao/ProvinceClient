@@ -1,5 +1,5 @@
 export default {
-  name: 'Details',
+  name: 'WendaDetails',
   data () {
     return {
       data: {
@@ -102,18 +102,12 @@ export default {
         }).then(res => {
           if (res.data.status !== 0) {
             this.status = this.data.questions[0].status
-            this.$q.notify({
-              message: '更改状态失败',
-              position: 'top-right'
-            })
+            this.$q.notify({ message: '更改状态失败', position: 'top-right' })
             return
           }
           this.data.questions[0].status = this.status
           this.switchWebsocket()
-          this.$q.notify({
-            message: '成功更改状态：' + this.badgeLabel(this.status),
-            position: 'top-right'
-          })
+          this.$q.notify({ message: '成功更改状态：' + this.badgeLabel(this.status), position: 'top-right' })
         })
       }).onCancel(() => {
         this.status = this.data.questions[0].status
