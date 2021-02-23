@@ -5,14 +5,14 @@
         <q-item clickable class="text-justify">
           <q-badge class="badge q-ma-xs" :color="badgeColor(q.status)" :label="badgeText(q.status)"/>
 
-          <q-badge outline class="badge q-ma-xs q-mr-sm" color="grey-13" :label="badgeClass(q.target)"/>
+          <q-badge outline class="badge q-ma-xs q-mr-sm" :label="badgeClass(q.target)" color="grey-13"/>
 
           <q-item-section class="text-weight-regular text-grey-9">{{ questionToString(q.question) }}</q-item-section>
         </q-item>
       </router-link>
     </q-list>
 
-    <q-btn round color="primary" icon="add" class="fixed-bottom-right new" size="lg"></q-btn>
+    <q-btn round class="fixed-bottom-right new" color="primary" icon="add" size="lg"></q-btn>
   </q-page>
 </template>
 
@@ -46,7 +46,7 @@ export default {
     load () {
       this.$axios.get('/apis/wenda/questions').then(res => {
         if (res.data.status !== 0) {
-          console.error('失败')
+          this.$q.notify({ message: '获取问题列表失败', position: 'top-right' })
           return
         }
         this.data = res.data.data
@@ -90,6 +90,7 @@ export default {
       try {
         return this.data.groups[target]
       } catch (e) {
+        this.$q.notify({ message: '获取群名称错误：', position: 'top-right' })
         console.error('获取群名称错误：', e)
       }
     }
