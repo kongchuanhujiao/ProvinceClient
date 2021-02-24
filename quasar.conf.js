@@ -65,7 +65,9 @@ module.exports = function (/* ctx */) {
       // https://quasar.dev/quasar-cli/handling-webpack
       extendWebpack (cfg) {
         cfg.externals = {
-          axios: 'axios'
+          vue: 'Vue',
+          axios: 'axios',
+          '@antv/g2': 'G2'
         }
         cfg.module.rules.push({
           enforce: 'pre',
