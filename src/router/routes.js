@@ -9,6 +9,11 @@ const routes = [
         component: () => import('pages/Index.vue')
       },
       {
+        path: 'home',
+        name: '欢迎',
+        component: () => import('pages/Home.vue')
+      },
+      {
         path: 'wenda/',
         redirect: '/wenda/home',
         component: () => import('src/EntryPoint.vue'),
