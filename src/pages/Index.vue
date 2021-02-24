@@ -1,53 +1,26 @@
 <template>
-  <q-page
-    class="flex flex-center"
-    style="background: url('https://s3.ax1x.com/2021/01/19/sRSg7n.png') left center / 50% no-repeat"
-  >
-    <q-form
-      class="q-pa-lg q-gutter-md text-center bg-white shadow-1"
-      style="position: absolute;right: 8%;max-width: 380px;width: 100%;border-radius: 16px"
-      @submit="login"
-    >
-      <q-input
-        outlined clearable autofocus
-        label="用户名"
-        v-model="account"
-        @blur="completeInput"
-        :rules="[
-          val => !!val || '用户名不能为空',
-          val => val.length <= 14 || '用户名有误'
-        ]"
+  <q-page class="flex flex-center justify-around">
+    <span class="desktop-only text-weight-bold welcome">欢<br>迎</span>
+
+    <q-form class="q-px-md text-center form" @submit="login">
+      <q-input outlined clearable autofocus label="用户名" v-model="account" @blur="completeInput"
+               :rules="[ val => !!val || '用户名不能为空', val => val.length <= 14 || '用户名有误' ]"
       >
         <template v-slot:prepend>
           <q-icon name="account_circle"/>
         </template>
       </q-input>
 
-      <q-input
-        outlined
-        type="tel"
-        label="验证码"
-        v-model="code"
-        :rules="[
-          val => !!val || '验证码不能为空',
-          val => val.length <= 4 || '验证码有误'
-        ]"
+      <q-input outlined class="q-my-md" type="tel" label="验证码" v-model="code"
+               :rules="[ val => !!val || '验证码不能为空', val => val.length <= 4 || '验证码有误' ]"
       >
         <template v-slot:prepend>
           <q-icon name="code"/>
         </template>
       </q-input>
 
-      <q-btn
-        outline rounded
-        type="submit"
-        size="lg"
-        class="q-px-xl"
-        color="primary"
-        label="登录"
-      />
+      <q-btn outline rounded type="submit" size="lg" class="q-px-xl" color="primary" label="登录"/>
     </q-form>
-
   </q-page>
 </template>
 
@@ -98,10 +71,21 @@ export default {
           message: '登录成功，正在为您跳转...',
           position: 'top-right'
         })
-
-        // TODO 去主页
+        this.$router.push('/home')
       })
     }
   }
 }
 </script>
+
+<style scoped>
+.welcome {
+  font-size: 16vh;
+}
+
+.form {
+  max-width: 380px;
+  width: 100%;
+  border-radius: 16px;
+}
+</style>
