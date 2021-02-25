@@ -107,7 +107,7 @@
   </q-page>
 </template>
 
-<script src="./Details.js"/>
+<script src="src/pages/wenda/Detail.js"/>
 
 <style scoped>
 
