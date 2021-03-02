@@ -7,7 +7,9 @@
 
           <q-badge outline class="badge q-ma-xs q-mr-sm" :label="badgeClass(q.target)" color="grey-13"/>
 
-          <q-item-section class="text-weight-regular text-grey-9">{{ questionToString(q.question) }}</q-item-section>
+          <q-item-section class="text text-weight-regular text-grey-9">
+            {{ questionToString(q.question) }}
+          </q-item-section>
         </q-item>
       </router-link>
     </q-list>
@@ -28,6 +30,13 @@
 
 .badge {
   height: 24px;
+}
+
+.text {
+  display: flex;
+  overflow: hidden;
+  max-height: 60px;
+  justify-content: flex-start;
 }
 </style>
 
