@@ -19,7 +19,7 @@ export default {
           count: 0,
           right: [],
           wrong: [{
-            type: '',
+            type: '暂无数据',
             value: []
           }]
         }
@@ -185,29 +185,24 @@ export default {
     },
     wrongDigest () {
       const d = this.data.result.wrong
-      if (d.length === 0) {
-        return [{
-          type: '暂无数据',
-          value: 0
-        }]
-      }
+      const r = []
       for (let i = 0; i < d.length; i++) {
-        const t = d[i]
-        d[i] = {
-          type: t.type,
-          value: t.value.length
+        r[i] = {
+          type: d[i].type,
+          value: d[i].value.length
         }
       }
-      d.sort((a, b) => {
+      r.sort((a, b) => {
         return a.value.length - b.value.length
       })
-      d.reverse()
-      return d
+      r.reverse()
+      if (r.length > 0) {
+        this.proneWrong = r[0].type
+      }
+      return r
     },
 
     update () {
-      this.proneWrong = this.wrongDigest()[0].type
-
       this.updateHistogram(0, [{
         type: '正确人数 ' + this.data.result.right.length,
         value: this.data.result.right.length
