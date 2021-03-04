@@ -9,7 +9,7 @@
     <div class="text-body1">
       <div class="q-my-xs">
         问题：
-        <span v-for="( item, i ) in data.questions[0].question" :key="i">
+        <span v-for="( item, i ) in data.questions[0].topic.question" :key="i">
               <span v-if="item.type === 'text'">{{ item.data }}</span>
               <img v-else class="question-img" alt="问题图片"
                    :src="'/assets/pictures/questions/'+$q.cookies.get('account') + item.data">
@@ -18,12 +18,12 @@
       <div class="q-my-xs">
         选项：
         <q-badge outline class="q-ma-xs" color="light-blue-12"
-                 v-for="( option, i ) in data.questions[0].options"
+                 v-for="( option, i ) in data.questions[0].topic.options"
                  :key="i"
                  :label="abc[i] + '. ' + option"
         />
       </div>
-      <div class="q-my-xs">答案：{{ data.questions[0].key }}</div>
+      <div class="q-my-xs">答案：{{ data.questions[0].topic.key }}</div>
     </div>
 
     <div class="q-my-md">
@@ -32,7 +32,7 @@
                :label="badgeLabel(data.questions[0].status)"
                :color="badgeColor(data.questions[0].status)"
       />
-      <q-badge outline :label="'已作答人数：' + data.calculations.count" color="blue"/>
+      <q-badge outline :label="'已作答人数：' + data.result.count" color="blue"/>
     </div>
     <q-btn-toggle unelevated class="q-mb-md" color="grey-2" text-color="grey-9" toggle-color="light-blue-12"
                   v-model="status"
@@ -65,7 +65,7 @@
         <q-separator/>
 
         <q-list separator>
-          <q-item class="items-center" v-for="( stu, i ) in data.calculations.right" :key="i">
+          <q-item class="items-center" v-for="( stu, i ) in data.result.right" :key="i">
             {{ data.members[stu] }}
           </q-item>
         </q-list>
@@ -87,13 +87,13 @@
       <q-expansion-item switch-toggle-side class="q-mt-md" label="回答错误的学生">
         <q-separator/>
         <q-expansion-item switch-toggle-side
-                          v-for="( sdqdq, i ) in data.calculations.wrong"
+                          v-for="( item, i ) in data.result.wrong"
                           :key="i"
-                          :label="'错误类型：'+sdqdq.type"
+                          :label="'错误类型：'+item.type"
         >
           <q-separator/>
           <q-list separator>
-            <q-item class="items-center" v-for="( stu, ii ) in sdqdq.member" :key="ii">
+            <q-item class="items-center" v-for="( stu, ii ) in item.value" :key="ii">
               {{ data.members[stu] }}
             </q-item>
           </q-list>

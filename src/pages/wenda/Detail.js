@@ -3,26 +3,26 @@ export default {
   data () {
     return {
       data: {
-        calculations: {
+        group_name: '',
+        members: [],
+        questions: [{
+          status: 0,
+          topic: {
+            target: 0,
+            options: [],
+            question: [],
+            key: ''
+          },
+          type: 0
+        }],
+        result: {
           count: 0,
           right: [],
           wrong: [{
             type: '',
-            member: []
+            value: []
           }]
-        },
-        group_name: '',
-        members: [],
-        questions: [
-          {
-            key: '',
-            options: [],
-            question: [],
-            status: 0,
-            target: 0,
-            type: 0
-          }
-        ]
+        }
       },
       type: ['选择题', '填空题'],
       abc: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I'],
@@ -37,7 +37,6 @@ export default {
         label: '停止作答',
         value: 2
       }],
-      page: '0',
       proneWrong: '暂无数据',
       chart: {},
       websocket: undefined,
@@ -57,12 +56,12 @@ export default {
         this.switchWebsocket()
 
         this.histogram(0, 'data-right', [{
-          type: '正确人数 ' + this.data.calculations.right.length,
-          value: this.data.calculations.right.length
+          type: '正确人数 ' + this.data.result.right.length,
+          value: this.data.result.right.length
         }])
         this.histogram(1, 'data-wrong', [{
-          type: '错误人数 ' + (this.data.calculations.count - this.data.calculations.right.length),
-          value: this.data.calculations.count - this.data.calculations.right.length
+          type: '错误人数 ' + (this.data.result.count - this.data.result.right.length),
+          value: this.data.result.count - this.data.result.right.length
         }])
         this.histogram(2, 'data-pronewrong', this.wrongDigest())
         this.update()
@@ -141,7 +140,7 @@ export default {
           this.websocket.onmessage = msg => {
             const data = JSON.parse(msg.data)
             console.log('服务器推送问答数据：', data)
-            this.data.calculations = data.Calculation
+            this.data.result = data.result
             this.update()
           }
           break
@@ -175,7 +174,7 @@ export default {
     },
 
     rightRate () {
-      const r = this.data.calculations.right.length / this.data.calculations.count
+      const r = this.data.result.right.length / this.data.result.count
       if (isNaN(r)) {
         return 0
       }
@@ -185,7 +184,7 @@ export default {
       return 100 - this.rightRate()
     },
     wrongDigest () {
-      const d = this.data.calculations.wrong
+      const d = this.data.result.wrong
       if (d.length === 0) {
         return [{
           type: '暂无数据',
@@ -196,11 +195,11 @@ export default {
         const t = d[i]
         d[i] = {
           type: t.type,
-          value: t.member.length
+          value: t.value.length
         }
       }
       d.sort((a, b) => {
-        return a.member.length - b.member.length
+        return a.value.length - b.value.length
       })
       d.reverse()
       return d
@@ -210,12 +209,12 @@ export default {
       this.proneWrong = this.wrongDigest()[0].type
 
       this.updateHistogram(0, [{
-        type: '正确人数 ' + this.data.calculations.right.length,
-        value: this.data.calculations.right.length
+        type: '正确人数 ' + this.data.result.right.length,
+        value: this.data.result.right.length
       }])
       this.updateHistogram(1, [{
-        type: '错误人数 ' + (this.data.calculations.count - this.data.calculations.right.length),
-        value: this.data.calculations.count - this.data.calculations.right.length
+        type: '错误人数 ' + (this.data.result.count - this.data.result.right.length),
+        value: this.data.result.count - this.data.result.right.length
       }])
       this.updateHistogram(2, this.wrongDigest())
     },

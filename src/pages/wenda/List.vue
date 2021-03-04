@@ -5,10 +5,10 @@
         <q-item clickable class="text-justify">
           <q-badge class="badge q-ma-xs" :color="badgeColor(q.status)" :label="badgeText(q.status)"/>
 
-          <q-badge outline class="badge q-ma-xs q-mr-sm" :label="badgeClass(q.target)" color="grey-13"/>
+          <q-badge outline class="badge q-ma-xs q-mr-sm" :label="badgeClass(q.topic.target)" color="grey-13"/>
 
           <q-item-section class="text text-weight-regular text-grey-9">
-            {{ questionToString(q.question) }}
+            {{ questionToString(q.topic.question) }}
           </q-item-section>
         </q-item>
       </router-link>
@@ -46,7 +46,14 @@ export default {
   data () {
     return {
       data: {
-        questions: [],
+        questions: [{
+          id: 0,
+          status: 0,
+          topic: {
+            question: [],
+            target: 0
+          }
+        }],
         groups: []
       }
     }
@@ -78,8 +85,8 @@ export default {
 
       return text
     },
-    badgeColor (status) {
-      switch (status) {
+    badgeColor (s) {
+      switch (s) {
         case 0:
           return 'green-13'
         case 1:
@@ -88,8 +95,8 @@ export default {
           return 'red-12'
       }
     },
-    badgeText (status) {
-      switch (status) {
+    badgeText (s) {
+      switch (s) {
         case 0:
           return '未开始'
         case 1:
@@ -98,9 +105,9 @@ export default {
           return '已结束'
       }
     },
-    badgeClass (target) {
+    badgeClass (t) {
       try {
-        return this.data.groups[target]
+        return this.data.groups[t]
       } catch (e) {
         this.$q.notify({
           message: '获取群名称错误：',
