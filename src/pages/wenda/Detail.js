@@ -19,7 +19,7 @@ export default {
           count: 0,
           right: [],
           wrong: [{
-            type: '暂无数据',
+            type: '',
             value: []
           }]
         }
@@ -186,11 +186,17 @@ export default {
     wrongDigest () {
       const d = this.data.result.wrong
       const r = []
+      if (d.length === 0) {
+        return [{
+          type: '暂无数据',
+          value: 0
+        }]
+      }
       for (let i = 0; i < d.length; i++) {
-        r[i] = {
+        r.push({
           type: d[i].type,
           value: d[i].value.length
-        }
+        })
       }
       r.sort((a, b) => {
         return a.value.length - b.value.length
