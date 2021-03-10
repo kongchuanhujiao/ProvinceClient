@@ -128,7 +128,13 @@ export default {
           }
           break
         case 1:
-          this.websocket = new WebSocket(this.address() + '/apis/wenda/runtime?id=' + this.$route.params.id)
+          this.websocket = new WebSocket(
+            this.address() +
+            '/apis/wenda/runtime?id=' +
+            this.$route.params.id +
+            '&token=' +
+            this.$q.localStorage.getItem('token')
+          )
           this.websocket.onopen = () => {
             this.close = setInterval(() => {
               try {
