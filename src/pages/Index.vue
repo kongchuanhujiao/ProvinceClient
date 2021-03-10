@@ -67,6 +67,8 @@ export default {
           return
         }
 
+        this.$q.localStorage.set("token", res.data.message)
+
         this.$q.notify({
           message: '登录成功，正在为您跳转...',
           position: 'top-right'
