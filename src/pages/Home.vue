@@ -4,7 +4,7 @@
       <q-avatar size="80px">
         <img src="https://s3.ax1x.com/2021/02/24/yONh28.png" alt="欢迎">
       </q-avatar>
-      <span class="q-ml-md text-h5">您好：{{ $q.cookies.get('account') }}，欢迎使用！</span>
+      <span class="q-ml-md text-h5">教师您好，欢迎使用！</span>
     </div>
 
     <q-separator/>
