@@ -31,7 +31,7 @@ const routes = [
           {
             path: 'questions/:id',
             name: '问答详情',
-            component: () => import('pages/wenda/Details.vue')
+            component: () => import('pages/wenda/Detail.vue')
           },
           {
             path: 'new',
