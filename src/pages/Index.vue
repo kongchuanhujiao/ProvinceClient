@@ -40,16 +40,13 @@ export default {
       }
 
       this.$axios.post('apis/accounts/code', { id: this.account }).then(res => {
-        if (res.data.status === 1) {
-          this.$q.notify({
-            message: '验证码发送失败：' + res.data.message,
-            position: 'top-right'
-          })
-          return
-        }
-
         this.$q.notify({
           message: '验证码发送成功，请注意查收',
+          position: 'top-right'
+        })
+      }).catch(() => {
+        this.$q.notify({
+          message: '获取问题列表失败',
           position: 'top-right'
         })
       })

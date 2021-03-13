@@ -61,14 +61,12 @@ export default {
   methods: {
     load () {
       this.$axios.get('/apis/wenda/questions').then(res => {
-        if (res.data.status !== 0) {
-          this.$q.notify({
-            message: '获取问题列表失败',
-            position: 'top-right'
-          })
-          return
-        }
         this.data = res.data.data
+      }).catch(() => {
+        this.$q.notify({
+          message: '获取问题列表失败',
+          position: 'top-right'
+        })
       })
     },
 

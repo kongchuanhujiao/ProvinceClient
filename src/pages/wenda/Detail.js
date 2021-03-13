@@ -46,10 +46,6 @@ export default {
   methods: {
     load () {
       this.$axios.get('/apis/wenda/questions?id=' + this.$route.params.id).then(res => {
-        if (res.data.status !== 0) {
-          console.error('获取问题失败')
-          return
-        }
         this.data = res.data.data
         this.status = res.data.data.questions[0].status
 
@@ -99,18 +95,16 @@ export default {
           id: Number(this.$route.params.id),
           status: this.status
         }).then(res => {
-          if (res.data.status !== 0) {
-            this.status = this.data.questions[0].status
-            this.$q.notify({
-              message: '更改状态失败',
-              position: 'top-right'
-            })
-            return
-          }
           this.data.questions[0].status = this.status
           this.switchWebsocket()
           this.$q.notify({
             message: '成功更改状态：' + this.badgeLabel(this.status),
+            position: 'top-right'
+          })
+        }).catch(() => {
+          this.status = this.data.questions[0].status
+          this.$q.notify({
+            message: '更改状态失败',
             position: 'top-right'
           })
         })
@@ -228,15 +222,13 @@ export default {
 
     praise () {
       this.$axios.post('/apis/wenda/praise', { id: Number(this.$route.params.id) }).then(res => {
-        if (res.data.status !== 0) {
-          this.$q.notify({
-            message: '表扬失败',
-            position: 'top-right'
-          })
-          return
-        }
         this.$q.notify({
           message: '表扬成功',
+          position: 'top-right'
+        })
+      }).catch(() => {
+        this.$q.notify({
+          message: '表扬失败',
           position: 'top-right'
         })
       })
