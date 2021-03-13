@@ -3,9 +3,9 @@
     <q-list>
       <router-link class="block link" v-for="q in data.questions" :key="q.id" :to="'/wenda/questions/'+q.id">
         <q-item clickable class="text-justify">
-          <q-badge class="badge q-ma-xs" :color="badgeColor(q.status)" :label="badgeText(q.status)"/>
+          <q-badge class="badge q-mr-xs" :color="badgeColor(q.status)" :label="badgeText(q.status)"/>
 
-          <q-badge outline class="badge q-ma-xs q-mr-sm" :label="badgeClass(q.topic.target)" color="grey-13"/>
+          <q-badge outline class="badge q-mx-xs q-mr-sm" :label="badgeClass(q.topic.target)" color="grey-13"/>
 
           <q-item-section class="text text-weight-regular text-grey-9">
             {{ questionToString(q.topic.question) }}
