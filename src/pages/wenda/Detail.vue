@@ -104,11 +104,13 @@
     <span class="text-h6">易错选项：{{ proneWrong }}</span>
     <div id="data-pronewrong"/>
 
+    <q-separator class="q-my-md"/>
+
+    <div class="q-mb-md">
+      <q-btn @click="download" label="下载详细数据"></q-btn>
+    </div>
+
   </q-page>
 </template>
 
 <script src="src/pages/wenda/Detail.js"/>
-
-<style scoped>
-
-</style>

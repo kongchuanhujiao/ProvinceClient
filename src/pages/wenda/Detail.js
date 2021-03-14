@@ -234,6 +234,13 @@ export default {
       })
     },
 
+    download () {
+      open(
+        '/apis/wenda/csv?id=' + this.$route.params.id +
+        '&token=' + this.$q.localStorage.getItem('token'), '_blank'
+      )
+    },
+
     address () {
       let p = 'wss:'
       if (location.protocol === 'http:') {
