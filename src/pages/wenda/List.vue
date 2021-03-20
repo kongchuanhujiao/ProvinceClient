@@ -14,7 +14,8 @@
       </router-link>
     </q-list>
 
-    <q-btn round class="fixed-bottom-right new" color="primary" icon="add" size="lg"></q-btn>
+    <q-btn to="/wenda/new" round class="fixed-bottom-right new" color="primary" icon="add" size="lg"></q-btn>
+    <q-btn to="/wenda/markets" round class="fixed-bottom-right market" color="primary" icon="store" size="lg"></q-btn>
   </q-page>
 </template>
 
@@ -24,7 +25,12 @@
 }
 
 .new {
-  bottom: 24px;
+  bottom: 32px;
+  right: 24px;
+}
+
+.market {
+  bottom: 112px;
   right: 24px;
 }
 

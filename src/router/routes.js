@@ -36,12 +36,12 @@ const routes = [
           {
             path: 'new',
             name: '新建问答',
-            component: () => import('pages/wenda/Home.vue')
+            component: () => import('pages/wenda/New.vue')
           },
           {
             path: 'markets',
             name: '问题市场',
-            component: () => import('pages/wenda/Home.vue')
+            component: () => import('pages/wenda/Market.vue')
           }
         ]
       }
