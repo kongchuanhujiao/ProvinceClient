@@ -9,7 +9,7 @@ axios.interceptors.response.use(resp => {
     return resp
   } else {
     Notify.create({ message: '失败：' + resp.data.message, position: 'top-right' })
-    Promise.reject(resp)
+    return Promise.reject(resp)
   }
 }, err => {
   switch (err.response.status) {
@@ -19,7 +19,7 @@ axios.interceptors.response.use(resp => {
     default:
       Notify.create({ message: '请求服务器失败，错误码：' + err.response.status, position: 'top-right' })
   }
-  Promise.reject(err)
+  return Promise.reject(err)
 })
 
 Vue.prototype.$axios = axios
