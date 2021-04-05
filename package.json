@@ -17,7 +17,7 @@
     "quasar": "^1.15.10"
   },
   "devDependencies": {
-    "@quasar/app": "^2.2.3",
+    "@quasar/app": "^2.2.4",
     "babel-eslint": "^10.0.1",
     "eslint": "^7.23.0",
     "eslint-config-standard": "^16.0.2",
